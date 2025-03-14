@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .carousel {
+            max-width: 100%; /* Set max width to 100% for full-width */
+            overflow: hidden; /* Hide overflow */
+        }
+        .carousel img {
+            height: 250px; /* Adjust image height */
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 10px; /* Add some rounding to the corners */
+            margin-right: 10px; /* Add spacing between images */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-lg font-bold">Parcel Path</a>
+            <div class="flex space-x-4">
+                <a href="/register/" class="text-white p-4 font-bold">Register</a>
+                <select id="adminDropdown"  class="bg-blue-600 p-4 text-white px-4 font-bold">
+                    <option value="/#/">Login</option>
+                    <option value="/login/">User</option>
+                    <option value="/postmanlogin/">Postman</option>
+                    <option value="/adminlogin/">Main Admin</option>
+                    <option value="/adminlogin2/">Sub Admin</option>
+                </select>
+                  <script>
+                    // Listen for changes on the dropdown
+                    document.getElementById('adminDropdown').addEventListener('change', function() {
+                      var selectedValue = this.value;
+                      if (selectedValue) {
+                        window.location.href = selectedValue; // Redirect to the selected URL
+                      }
+                    });
+                  </script>
+                                      
+                  
+                  </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div class="relative carousel mt-4">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            <div class="flex items-center">
+                <img src="https://prajyot.com/wp-content/uploads/2024/02/Indian-post-service-image.png" alt="Indian Post Service">
+                <img src="https://st2.depositphotos.com/5794592/9273/v/450/depositphotos_92732010-stock-illustration-post-office-design.jpg" alt="Post Office Design">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReuFpzWPuIdUVQ64i5pcT1Vgph9EcrMvp8sQ&s" alt="Post Office Image">
+                <img src="https://thumbs.dreamstime.com/b/post-office-building-delivery-truck-mailbox-city-background-post-office-building-delivery-truck-mailbox-city-103964779.jpg" alt="Post Office Building">
+                
+                <!-- Duplicate images for a never-ending effect -->
+                <img src="https://prajyot.com/wp-content/uploads/2024/02/Indian-post-service-image.png" alt="Indian Post Service">
+                <img src="https://st2.depositphotos.com/5794592/9273/v/450/depositphotos_92732010-stock-illustration-post-office-design.jpg" alt="Post Office Design">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReuFpzWPuIdUVQ64i5pcT1Vgph9EcrMvp8sQ&s" alt="Post Office Image">
+                <img src="https://thumbs.dreamstime.com/b/post-office-building-delivery-truck-mailbox-city-background-post-office-building-delivery-truck-mailbox-city-103964779.jpg" alt="Post Office Building">
+            </div>
+        </marquee>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto my-8">
+        <h1 class="text-3xl font-bold text-center mb-4">Our Services</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Mail Services</h2>
+                <p>We offer reliable mail services to deliver your letters and parcels safely and on time.</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Parcel Delivery</h2>
+                <p>Fast and efficient parcel delivery services, both locally and internationally.</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Post Office Boxes</h2>
+                <p>Secure your mail with our post office box rental services available in various sizes.</p>
+            </div>
+        </div>
+        <h1 class="text-3xl font-bold text-center my-8">Contact Us</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Help Line</h2>
+                <p>1234-5678-9000</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Email</h2>
+                <p>Parcelpath@gmail.com</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="font-bold">Website</h2>
+               <p>Parcel Path</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 mt-8">
+        <div class="container mx-auto text-white text-center">
+            &copy; 2024 Parcel Path. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

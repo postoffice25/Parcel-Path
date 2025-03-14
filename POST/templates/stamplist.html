@@ -1,0 +1,82 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stamp List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eaeaea;
+        }
+        img {
+            max-width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Stamp List</h1>
+    
+    <table>
+        <thead>
+
+            <tr>
+                <th>Stamp Nmae</th>
+                <th>Cost</th>
+                <th>Weight</th>
+                <th>Description</th>
+                <th>Release date</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stamp in s %}
+            <tr>
+                <td>{{ stamp.stamp_name }}</td>
+                <td>{{ stamp.cost }}</td>
+                <td>{{ stamp.weight }}</td>
+                <td>{{ stamp.description }}</td>
+                <td>{{ stamp.release_date }}</td>
+                <td>{{ stamp.status }}</td>
+                {% if stamp.image %}
+                <td><img src="{{ stamp.image.url }}" alt="Stamp Image"></td>
+                {% else %}
+                  <td>No image found</td>
+                {% endif %}
+                <td><a href="/editstamp/{{ stamp.id}}">Edit</a></td>
+                <td><a href="/deletestamp/{{ stamp.id }}">Delete</a></td>
+              
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10">No stamp records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
+{% endblock %}

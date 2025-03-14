@@ -1,0 +1,80 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postoffice List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eaeaea;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Postoffice List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Post Office ID</th>
+                <th>Post OfficeName</th>
+                <th>Image</th>
+                <th>District</th>
+                <th>Description</th>
+                <th>Stationmaster</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for postoffice in postoffice %}
+            <tr>
+                <td>{{ postoffice.postoffice_id }}</td>
+                <td>{{ postoffice.postoffice_name }}</td>
+                {% if postoffice.image %}
+                <td><img src="{{ postoffice.image.url }}" alt="Stamp Image" width="100" height="100"></td>
+                {% else %}
+                  <td>No image found</td>
+                {% endif %}
+                <td>{{ postoffice.district }}</td>
+                <td>{{ postoffice.description }}</td>
+                <td>{{ postoffice.stationmaster }}</td>
+                <td>{{ postoffice.contact }}</td>
+                <td>{{ postoffice.email }}</td>
+    
+                <td><a href="/editpostoffice/{{ postoffice.id}}">Edit</a></td>
+                <td><a href="/deletepostoffice/{{ postoffice.id }}">Delete</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10">No postoffice records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
+
+{% endblock %}
+

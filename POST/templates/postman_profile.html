@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman Profile</title>
+    <!-- Bootstrap 4 for responsive design -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for additional styling -->
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .profile-card {
+            margin-top: 50px;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-card h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-card .detail {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .profile-card .detail strong {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .btn-custom, .btn-danger-custom {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        .btn-danger-custom {
+            background-color: #dc3545;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .btn-danger-custom:hover {
+            background-color: #c82333;
+            transform: translateY(-3px);
+        }
+
+        /* Avatar Image Style */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            border: 4px solid #007bff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .card-footer {
+            background-color: #f7f8fa;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .profile-card .btn-custom, .profile-card .btn-danger-custom {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Container -->
+    <div class="container">
+        <div class="profile-card">
+            
+            <!-- Conditional Profile Avatar Image -->
+            {% if postman.image %}
+                <center><img src="{{ postman.image.url }}" alt="Profile Avatar" class="profile-avatar" /></center>
+            {% else %}
+                <div class="profile-avatar d-flex justify-content-center align-items-center" style="background-color: #f3f5f7; color: rgb(0, 0, 0); font-size: 24px;">
+                    <span>No Profile Picture</span>
+                </div>
+            {% endif %}
+
+            <h2>Your Profile</h2>
+
+            <!-- Profile Details -->
+            <div class="detail">
+                <strong>Postman ID:</strong> {{ postman.postman_id }}
+            </div>
+            <div class="detail">
+                <strong>Name:</strong> {{ postman.name }}
+            </div>
+            <div class="detail">
+                <strong>Age:</strong> {{ postman.age }}
+            </div>
+            <div class="detail">
+                <strong>Gender:</strong> {{ postman.gender }}
+            </div>
+            <div class="detail">
+                <strong>Address:</strong> {{ postman.address }}
+            </div>
+            <div class="detail">
+                <strong>Phone:</strong> {{ postman.phone }}
+            </div>
+            <div class="detail">
+                <strong>Email:</strong> {{ postman.email }}
+            </div>
+            <div class="detail">
+                <strong>Post Office:</strong> {{ postman.postoffice_name }}
+            </div>
+            <div class="detail">
+                <strong>Status:</strong> {{ postman.status }}
+            </div>
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <a href="/postman_profile_edit/{{ postman.id }}/" class="btn-custom">Edit Profile</a>
+                <a href="/postman_profile_delete/{{ postman.id }}/" class="btn-danger-custom">Delete Profile</a>
+                <a href="/posthome/" class="btn-custom">Back</a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional: jQuery and Bootstrap JS for additional functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

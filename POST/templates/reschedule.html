@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reschedule Parcel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listener for the Pay Now button
+            document.querySelectorAll('.pay-now').forEach(button => {
+                button.addEventListener('click', function() {
+                    const rescheduleId = this.getAttribute('data-id');
+                    
+                    // Fetch Razorpay order details from the backend
+                    fetch(`/initiate_payment/${rescheduleId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                alert(data.error);
+                                return;
+                            }
+
+                            var options = {
+                                "key": data.razorpay_key_id,  // Your Razorpay Key ID
+                                "amount": data.amount * 100,  // Amount in paise
+                                "currency": "INR",
+                                "order_id": data.order_id,  // Order ID created on the backend
+                                "handler": function (response) {
+                                    // Send payment success data to the backend for verification
+                                    fetch('/payment-success/', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            razorpay_payment_id: response.razorpay_payment_id,
+                                            razorpay_order_id: response.razorpay_order_id,
+                                            razorpay_signature: response.razorpay_signature
+                                        })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.status === 'success') {
+                                            alert('Payment Successful');
+                                        } else {
+                                            alert('Payment Verification Failed');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error during payment verification:', error);
+                                        alert('An error occurred while verifying the payment');
+                                    });
+                                },
+                                "prefill": {
+                                    "name": "John Doe",
+                                    "email": "john@example.com",
+                                    "contact": "9876543210"
+                                }
+                            };
+
+                            var rzp1 = new Razorpay(options);
+                            rzp1.open();
+                        })
+                        .catch(error => {
+                            console.error('Error initiating payment:', error);
+                            alert('An error occurred while initiating payment');
+                        });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Reschedule Parcel</h1>
+        <hr>
+        <!-- Display messages for errors or success -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if not obj %}
+    <!-- Reschedule form -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="card p-4 shadow">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="rescheduled_date" class="form-label">Rescheduled Date:</label>
+                    <input type="date" id="rescheduled_date" name="rescheduled_date" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'user_parcels' %}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Reschedule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <!-- Display message or other content when a reschedule already exists -->
+    <p>Reschedule request already exists for this parcel.</p>
+{% endif %}
+<p>Please note:Rescheduling possible only one time</p>
+        <!-- Display Previous Reschedules -->
+        <div class="mt-5">
+            <h3>Previous Reschedule Requests</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Postal ID</th>
+                        <th>Rescheduled Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reschedule in obj %}
+                        <tr>
+                            <td>{{ reschedule.parcel.parcel_id }}</td>
+                            <td>{{ reschedule.rescheduled_date }}</td>
+                            <td>
+                                {% if reschedule.is_approved %}
+                                    <span class="text-success">Approved</span>
+                                {% else %}
+                                    <span class="text-warning">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if reschedule.is_approved and not reschedule.payment_status %}
+                                <button class="btn btn-success pay-now" data-id="{{ reschedule.id }}">Pay Now</button>
+                                {% elif reschedule.payment_status %}
+                                <p>Paid</p>
+                                {% else %}
+                                <p>Not approved</p>
+
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3" class="text-center">No previous reschedule requests.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

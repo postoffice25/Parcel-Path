@@ -1,0 +1,106 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const items = document.querySelectorAll('.item');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+
+                items.forEach(item => {
+                    const name = item.querySelector('.name').textContent.toLowerCase();
+
+                    if (name.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Display a message if no items match the search
+                const visibleItems = Array.from(items).filter(item => item.style.display === 'block');
+                const noResultsMessage = document.getElementById('noResultsMessage');
+                if (visibleItems.length === 0) {
+                    noResultsMessage.style.display = 'block';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/postmanlist2/" class="text-white text-xl font-bold">Postman List</a>
+            <a href="/home/" class="text-white font-bold">Back</a>
+        </div>
+    </nav>
+    <div class="container mx-auto mt-8">
+        <!-- Search Bar -->
+        <div class="mb-6 relative">
+            <input 
+                id="searchInput" 
+                type="text" 
+                placeholder="Search by post office name..." 
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500">
+        </div>
+
+        <!-- No Results Message -->
+        <p id="noResultsMessage" class="text-center text-gray-500 mt-4" style="display: none;">
+            No matching post offices found.
+        </p>
+
+        <!-- Post Offices -->
+        {% if postoffices and not selected_postoffice %}
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Select a Post Office</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for postoffice in postoffices %}
+            <div class="item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="name text-xl font-semibold text-gray-800">{{ postoffice.postoffice_name }}</h2>
+                <a 
+                    href="?postoffice_name={{ postoffice.postoffice_name }}" 
+                    class="text-blue-500 hover:underline mt-4 block">View Postmen</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% elif selected_postoffice %}
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Post Office: "{{ selected_postoffice }}"</h2>
+        <a href="/postmanlist2/" class="text-blue-500 hover:underline mb-4 inline-block">Back to All Post Offices</a>
+
+        <!-- Postmen -->
+        {% if postmen %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for postman in postmen %}
+            <div class="item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="name text-xl font-semibold text-gray-800">{{ postman.name }}</h2>
+                <p class="text-gray-700"><strong>ID:</strong> {{ postman.postman_id }}</p>
+                <p class="text-gray-700"><strong>Age:</strong> {{ postman.age }}</p>
+                <p class="text-gray-700"><strong>Phone:</strong> {{ postman.phone }}</p>
+                <p class="text-gray-700"><strong>Gender:</strong> {{ postman.gender }}</p>
+                <p class="text-gray-700"><strong>Address:</strong> {{ postman.address }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-gray-500 mt-4">
+            No postmen are available in "{{ selected_postoffice }}". Please select another post office.
+        </p>
+        {% endif %}
+        {% else %}
+        <p class="text-center text-gray-500">
+            No post offices available at the moment. Please check back later.
+        </p>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

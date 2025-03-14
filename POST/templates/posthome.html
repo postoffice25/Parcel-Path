@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman Homepage </title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .carousel {
+            max-width: 100%; /* Set max width to 100% for full-width */
+            overflow: hidden; /* Hide overflow */
+        }
+        .carousel img {
+            height: 250px; /* Adjust image height */
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 10px; /* Add some rounding to the corners */
+            margin-right: 10px; /* Add spacing between images */
+        }
+        /* Add hover effect for links */
+        .pop-link {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+    
+        .pop-link:hover {
+            transform: scale(1.1); /* Slightly enlarges */
+            color: rgb(0, 153, 255); /* Changes text color */
+            text-shadow: 0px 0px 10px rgb(0, 153, 255); /* Adds glowing effect */
+        }
+    </style>
+</head>
+<body class="bg-white-400 p-4">
+
+    <!-- Navbar -->
+   <!-- Navbar -->
+<nav class="bg-blue-900 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-white text-lg font-bold">Parcel Path</a>
+        <!-- Logo or any other content on the left can go here -->
+        <div class="text-white font-bold text-xl">
+            <!-- You can add a logo or some text here if needed -->
+        </div>
+
+        <!-- Right-aligned buttons for Logout and Profile -->
+        <div class="flex justify-end space-x-4"> <!-- Added space between buttons -->
+                <div class="flex space-x-4">
+                    <a href="/postman_profile/" class="text-white px-4 font-bold">Profile</a>
+                    <a href="/logout/" class="text-white px-4 font-bold">Logout</a>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto my-8">
+        <div class="content">
+            <h1 class="text-3xl font-bold text-center mb-4">Parcels</h1>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Parcel Delivery</h2>
+                    <a href="/parcellist3/" class="text-black  pop-link">Info of all the parcels.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Parcel List</h2>
+                    <a href="/postmanparcel2/" class=" pop-link">Update the status of the parcel here.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Delivered Parcels</h2>
+                    <a href="/delivered_parcels/" class=" pop-link">Info of delivered parcels.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Rescheduled Parcels</h2>
+                    <a href="/rescheduled_parcels/" class=" pop-link">Info of rescheduled parcels.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Returned Parcels</h2>
+                    <a href="/returned_parcels/" class=" pop-link">Info of returned parcels.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Door closed Parcels</h2>
+                    <a href="/doorclosed_parcels/" class=" pop-link">Info of door closed parcels.</a>
+                </div>
+            </div>
+
+            <h1 class="text-3xl font-bold text-center my-8">Information</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Post Office</h2>
+                    <a href="/postofficelist3/" class=" pop-link">Info of post office.</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Post Man </h2>
+                    <a href="/postmanlist3/" class= " pop-link">Info of post man.</a>
+                </div>
+            </div>
+
+            <h1 class="text-3xl font-bold text-center my-8">Contact Us</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Help Line</h2>
+                    <p class="text-black">1234-5678-9000</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Email</h2>
+                    <p class="text-black">Parcelpath@gmail.com</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-black font-bold">Website</h2>
+                    <p class="text-black">Parcel Path</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 p-4" mt-8>
+        <div class="container mx-auto text-white text-center">
+            &copy; 2024 Parcel Path. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+

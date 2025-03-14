@@ -1,0 +1,77 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eaeaea;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Postman List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Postman ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Post Office</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for postman in postman %}
+            <tr>
+                <td>{{ postman.postman_id }}</td>
+                <td>{{ postman.name }}</td>
+                <td>{{ postman.age }}</td>
+                <td>{{ postman.gender }}</td>
+                <td>{{ postman.address }}</td>
+                <td>{{ postman.phone }}</td>
+                <td>{{ postman.email }}</td>
+                <td>{{ postman.postoffice_name }}</td>
+                <td>{{ postman.status }}</td>
+                <td><a href="/editpostman/{{ postman.id}}">Edit</a></td>
+                <td><a href="/deletepostman/{{ postman.id }}">Delete</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10">No postman records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
+{% endblock %}
+
+

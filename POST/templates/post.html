@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width,initial-scale=1.0">
+	<title>post</title>
+    <style>
+       // Inter / Sans-serif
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Global Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  $black: #303030;
+  $grey: #909090;
+  $off-white: #EDEEE9;
+  $code: #D8DBCE;
+  position: relative;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  $sans-serif: 'Inter', sans-serif;
+  background-color: $off-white;
+  
+  body {
+    background-color: $off-white;
+    color: $black;
+    font-family: $sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    padding: 2.5vh 10vw;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
+    h1 {
+      font-size: clamp(1rem, 6vw, 10rem);
+      margin: 15vh 0 2rem;
+    }
+    
+    a {
+      text-decoration: underline;
+      color: $black;
+    }
+    
+    code {
+      font-size: 1rem;
+      padding: 0 0.5rem;
+      background-color: $code;
+    }
+    
+    .explanation {
+      width: 100%;
+      margin-bottom: 15vh;
+      p {
+        font-size: 1rem;
+        max-width: 75ch;
+        margin: 2rem 0;
+      }
+      
+      ul:last-child {
+        margin-bottom: 2rem;
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+        
+        li {
+          list-style: none;
+          position: relative;
+          margin: 0.5rem 0;
+          &::before {
+            content: '👉';
+            position: absolute;
+            top: -0.25rem;
+            left: -2rem;
+          }
+        }
+      }
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 768px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 2rem 1.5rem;
+      background-color: $code;
+      
+      @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .cta-form {
+        margin-bottom: 2rem;
+        text-align: center;
+        
+        @media (min-width: 768px) {
+          margin-bottom: 0;
+          margin-right: 2rem;
+          text-align: left;
+        }
+        
+        h2 {
+        font-size: 1.5rem;
+        width: 100%;
+        max-width: 25ch;
+        margin: 0 auto;
+        text-align: center;
+        
+          @media (min-width: 768px) {
+            text-align: left;
+            margin: 0;
+          }
+        }
+        
+        p {
+          margin-top: 1rem;
+          font-size: 1rem;
+          width: 100%;
+          max-width: 24ch;
+        }
+      }
+      
+    }
+    
+}
+    .form {
+      align-self: center;
+    }
+ 
+    .form__input {
+      width: clamp(120px, 50vw, 420px);
+      height: 2.5rem;
+      padding: 0 1.25rem;
+      border: 1px solid $black;
+      border-radius: 2px;
+      margin: 0.625rem auto;
+      transition: all 250ms;
+      @media (min-width: 768px) {
+        width: clamp(120px, 35vw, 420px);
+      }
+
+      &:focus {
+        outline: none;
+        border-top-color: rgba(0,0,0,0.1);
+      }
+      
+      &:focus + .form__label, &:not(:placeholder-shown) + .form__label {
+        transform: translateY(-4.50rem) scale(1);
+        color: $black;
+      }
+
+      &::placeholder {
+          display: none;
+          color: transparent;
+        
+      }
+
+      &:not(:placeholder-shown) {
+        border-top-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .form__label {
+      font-size: 1rem;
+      color: $grey;
+      display: block;
+      
+      transform: translate(1.25rem,-2.5rem);
+      transform-origin: 0 0; /* Used later for transitions */
+      transition: all 500ms;
+    
+      pointer-events: none; 
+    }
+    
+  }
+    </style>
+</head>
+<body>
+    <h1>INFO</h1>
+    <div class="container">
+      <div class="cta-form">
+       
+      </div>
+      <form action="" class="form">
+
+        <input type="text"placeholder="post_id" class="form__input" id="post_id" />
+        <label for="post_id" class="form__label">Post ID</label>
+
+        <input type="text"placeholder="sendername" class="form__input" id="sendername" />
+        <label for="sendername" class="form__label">Sender name</label>
+    
+        <input type="text"placeholder="sender_address" class="form__input" id="sender_address" />
+        <label for="sender_address" class="form__label">Sender address</label>
+
+        <input type="text"placeholder="sender_contact" class="form__input" id="sender_contact" />
+        <label for="sender_contact" class="form__label">Sender contact</label>
+
+        <input type="text" placeholder="receivername" class="form__input" id="receivername" />
+        <label for="receivername" class="form__label">Receiver Name</label>
+  
+        <input type="text" placeholder="receiver_address" class="form__input" id="receiver_address" />
+        <label for="receiver_address" class="form__label">Receiver address</label>
+  
+        <input type="text" placeholder="receiver_postoffice" class="form__input" id="receiver_postoffice" />
+        <label for="receiver_postoffice" class="form__label">Receriver Postoffice</label>
+
+        <input type="text"placeholder="receiver_contact" class="form__input" id="receiver_contact" />
+        <label for="receiver_contact" class="form__label">Receiver contact</label>
+
+        <input type="text"placeholder="posted_dste" class="form__input" id="posted_date" />
+        <label for="posted_date" class="form__label">Posted date</label>
+
+        <input type="text"placeholder="remarks" class="form__input" id="remarks" />
+        <label for="remarks" class="form__label">Remarks</label>
+
+        <select id="status" class="form__input">
+
+            <option value="" disabled selected>Select a status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
+        </select>
+
+        <input type="text"placeholder="weight" class="form__input" id="weight" />
+        <label for="weight" class="form__label">Weight</label>
+
+        <input type="text"placeholder="price" class="form__input" id="price" />
+        <label for="price" class="form__label">Price</label>
+
+        <input type="file"placeholder="screenshot" class="form__input" id="screenshot" />
+        <label for="screenshot" class="form__label">Screenshot</label>
+
+        <input type="text"placeholder="postman_username" class="form__input" id="postman_username" />
+        <label for="posttman_username" class="form__label">Postman Username</label>   
+        
+      </form>
+    </div>
+</body>
+</html>

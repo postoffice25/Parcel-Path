@@ -1,0 +1,103 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAMP REGISTER</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+   <center> <h1>Add Stamp</h1></center>
+    {% if error %}
+    <p>{{error}}
+    {% endif%}
+    {% if errors %}
+    <p>{{errors}}
+    {% endif%}
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="stamp_name">Stamp Name:</label>
+        <input type="text" id="stamp_name" name="stamp_name" maxlength="100" required>
+        <br><br>
+
+        <label for="cost">Cost:</label>
+        <input type="number" id="cost" name="cost" maxlength="500" required>
+        <br><br>
+
+        <label for="weight">Weight(Grams):</label>
+        <input type="number" id="weight" name="weight" required>
+        <br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" maxlength="800" required>
+        <br><br>
+
+        <label for="release_date">Release date:</label>
+        <input type="date" id="release_date" name="release_date" required>
+        <br><br>
+
+        <label for="image">Image:</label>
+		<input type="file" id="image" name="image"  accept="image/*" readonly>
+        <br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="">Select Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+{% endblock %}

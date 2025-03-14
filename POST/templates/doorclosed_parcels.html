@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doorclosed Parcels</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const items = document.querySelectorAll('tbody tr'); // Select table rows
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            let hasResults = false;
+
+            items.forEach(item => {
+                const postedDate = item.querySelector('td:nth-child(11)')?.textContent.toLowerCase(); // Delivery date column
+                const parcelId = item.querySelector('td:nth-child(1)')?.textContent.toLowerCase(); // Parcel ID column
+
+                // Check if either parcel ID or posted date matches the search term
+                if (parcelId.includes(searchTerm) || postedDate.includes(searchTerm)) {
+                    item.style.display = 'table-row';
+                    hasResults = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show/hide "No Results" message
+            document.getElementById('noResultsMessage').style.display = hasResults ? 'none' : 'block';
+        });
+    });
+</script>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Doorclosed Parcels</h1>
+        <div class="container mx-auto mt-8 p-4">
+            <!-- Search Bar -->
+            <div class="mb-6 relative">
+                <input 
+                    id="searchInput" 
+                    type="text" 
+                    placeholder="Search by parcel ID or delivery date..." 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500">
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResultsMessage" style="display:none; color: gray; text-align: center;">
+                No results found.
+            </div>
+
+            <table class="table mt-3">
+                <div class="text-right">
+                    <a href="{% url 'posthome' %}" class="link">Back to Home</a>
+                </div>
+                <thead>
+                    <tr>
+                        <th>Parcel ID</th>
+                        <th>Sender Name</th>
+                        <th>Sender Contact</th>
+                        <th>Receiver Name</th>
+                        <th>Receiver Contact</th>
+                        <th>Receiver Postoffice</th>
+                        <th>Postman</th>
+                        <th>Distance</th>
+                        <th>Weight</th>
+                        <th>Price</th>
+                        <th>Delivery Date</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parcel in doorclosed_items %}
+                        <tr>
+                            <td>{{ parcel.parcel_id }}</td>
+                            <td>{{ parcel.sendername }}</td>
+                            <td>{{ parcel.sender_contact }}</td>
+                            <td>{{ parcel.receivername }}</td>
+                            <td>{{ parcel.receiver_contact }}</td>
+                            <td>{{ parcel.receiver_postoffice }}</td>
+                            <td>{{ parcel.postman_name }}</td>
+                            <td>{{ parcel.kms }}</td>
+                            <td>{{ parcel.weight }} kg</td>
+                            <td>{{ parcel.price }}</td>
+                            <td>{{ parcel.posted_date }}</td>
+                            <td>{{ parcel.remarks }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12" class="text-center text-gray-500">No parcel records found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

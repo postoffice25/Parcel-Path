@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .form-control {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-top: 5px;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+   
+
+    <h1>Parcel List</h1>
+    <div class="text-right">
+        <a href="{% url 'posthome' %}" class="link">Back to Home</a>
+    </div>
+    
+
+    <div class="search-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by Parcel ID, Sender, or Receiver" onkeyup="searchTable()">
+    </div>
+    {% if parcel %}
+    <div class="table-container">
+        <table class="table table-striped" id="parcelTable">
+            <thead>
+                <tr>
+                    <th>Parcel ID</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in parcel %}
+                    {% if p.status != 'itemdelivered' %}
+                        <tr>
+                            <td>{{ p.parcel_id }}</td>
+                            <td>{{ p.sendername }}</td>
+                            <td>{{ p.receivername }}</td>
+                            <td>{{ p.status }}</td>
+                            <td>
+                                <!-- Status update form with dropdown -->
+                                <form method="POST" action="{% url 'update_status1' p.id %}">
+                                    {% csrf_token %}
+                                    <select name="status">
+                                        <option value="itemdelivered" {% if p.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                                        <option value="doorclosed" {% if p.status == 'Door Closed' %}selected{% endif %}>Door Closed</option>
+                                        <option value="returned" {% if p.status == 'Returned' %}selected{% endif %}>Returned</option>
+                                        <option value="rescheduled" {% if p.status == 'Rescheduled' %}selected{% endif %}>Rescheduled</option>
+                                         <!-- Hidden options -->
+                                    </select>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-records">No parcel records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    
+
+    <script>
+        function searchTable() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+            var table = document.getElementById('parcelTable');
+            var rows = table.getElementsByTagName('tr');
+        
+            for (var i = 1; i < rows.length; i++) {  // Skip the first row (header row)
+                var cells = rows[i].getElementsByTagName('td');
+                var found = false;
+        
+                // Loop through each cell in the row and check if it matches the search query
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = cells[j];
+                    if (cell) {
+                        if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                        }
+                    }
+                }
+        
+                // Show or hide row based on search result
+                if (found) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

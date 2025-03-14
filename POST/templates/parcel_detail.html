@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .parcel-detail {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .parcel-detail:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .parcel-info p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .parcel-info strong {
+            color: #007bff;
+        }
+
+        .detail-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .parcel-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid #007bff;
+            margin-top: 20px;
+        }
+
+        .row {
+            margin-top: 20px;
+        }
+
+        .col-md-6 {
+            padding: 10px;
+        }
+
+        .col-md-6 p {
+            margin-bottom: 15px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            background-color: #f0f9ff;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .col-md-6 {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .parcel-detail {
+                padding: 20px;
+            }
+
+            .detail-title {
+                font-size: 18px;
+            }
+
+            .parcel-info p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center text-primary mb-4">Parcel Details</h1>
+
+    <div class="parcel-detail">
+        <!-- Parcel ID and Main Details Card -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Main Details
+                    </div>
+                    <div class="card-body">
+                        <p class="detail-title"><strong>Parcel ID:</strong> {{ parcel.parcel_id }}</p>
+                        <p><strong>Sender Name:</strong> {{ parcel.sendername }}</p>
+                        <p><strong>Receiver Name:</strong> {{ parcel.receivername }}</p>
+                        <p><strong>Status:</strong> {{ parcel.get_status_display }}</p>
+                        <p><strong>Weight:</strong> {{ parcel.weight }} kg</p>
+                        <p><strong>Price:</strong> ₹{{ parcel.price }}</p>
+                        {% if parcel.screenshot %}
+                            <p><strong>Parcel Image:</strong><br><img src="{{ parcel.screenshot.url }}" alt="Parcel Image" class="parcel-image"></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Details Card -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Additional Details
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Sender Address:</strong> {{ parcel.sender_address }}</p>
+                        <p><strong>Sender Contact:</strong> {{ parcel.sender_contact }}</p>
+                        <p><strong>Receiver Address:</strong> {{ parcel.receiver_address }}</p>
+                        <p><strong>Receiver Contact:</strong> {{ parcel.receiver_contact }}</p>
+                        <p><strong>Receiver Email:</strong> {{ parcel.receiver_email }}</p>
+                        <p><strong>Receiver Post Office:</strong> {{ parcel.receiver_postoffice }}</p>
+                        <p><strong>Postman Name:</strong> {{ parcel.postman_name }}</p>
+                        <p><strong>Delivery Date:</strong> {{ parcel.posted_date }}</p>
+                        <p><strong>Remarks:</strong> {{ parcel.remarks }}</p>
+                        <p><strong>KMs:</strong> {{ parcel.kms }} km</p>
+                        <p><strong>Re:</strong> {{ parcel.kms }} km</p>
+                    </div>
+                </div>
+                <a href="{% url 'user_parcels' %}" class="back-button">Back to Parcels</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

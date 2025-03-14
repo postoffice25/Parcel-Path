@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Parcels</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .parcel-card {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .parcel-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .parcel-card h5 {
+            font-size: 18px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .parcel-card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .parcel-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .btn-view-details{
+            margin-top: 15px;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .reschedule-btn{
+            margin-top: 15px;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .back-btn {
+            margin-top: 15px;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            width: 20%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-view-details {
+            background-color: #007bff;
+        }
+
+        .btn-view-details:hover {
+            background-color: #0056b3;
+        }
+
+        .reschedule-btn {
+            background-color: #28a745;
+        }
+
+        .reschedule-btn:hover {
+            background-color: #218838;
+        }
+
+        .back-btn {
+            background-color: #6c757d;
+        }
+
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-4 {
+            flex:  0 33%;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .col-md-4 {
+                flex:  0 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-md-4 {
+                flex: 20%;
+            }
+        }
+        .right-align {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Your Parcels</h1>
+    <div class="right-align">
+        <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+    </div>
+    <div class="row">
+        {% for parcel in parcels %}
+        <div class="col-md-4">
+            <div class="parcel-card">
+                <h5>Parcel ID: {{ parcel.parcel_id }}</h5>
+                <p><strong>Sender Name:</strong> {{ parcel.sendername }}</p>
+                <p><strong>Receiver Name:</strong> {{ parcel.receivername }}</p>
+                <p><strong>Status:</strong> {{ parcel.status }}</p>
+                <p><strong>Weight:</strong> {{ parcel.weight }} kg</p>
+                <p><strong>Price:</strong> ₹{{ parcel.price }}</p>
+
+                {% if parcel.screenshot %}
+                <p><strong>Image:</strong><br><img src="{{ parcel.screenshot.url }}" alt="Parcel Image"></p>
+                {% endif %}
+
+                <a href="{% url 'parcel_detail' parcel.id %}" class="btn-view-details">View Details</a>
+                <a href="{% url 'reschedule' parcel.id %}" class="reschedule-btn">Reschedule</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="col-12 text-center">You have no parcels.</p>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html> 

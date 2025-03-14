@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivered Parcels</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Delivered Parcels</h1>
+        <table class="table mt-3">
+            <div class="text-right">
+                <a href="{% url 'home' %}" class="link">Back to Home</a>
+            </div>
+            <thead>
+                <tr>
+                    <th>Parcel ID</th>
+                    <th>Sender Name</th>
+                    <th>Sender Contact</th>
+                    <th>Receiver Name</th>
+                    <th>Receiver Contact</th>
+                    <th>Receiver Postoffice</th>
+                    <th>Postman</th>
+                    <th>Distance</th>
+                    <th>Weight</th>
+                    <th>Price</th>
+                    <th>Delivery Date</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for parcel in userdelivered_items %}
+                    <tr>
+                        <td>{{ parcel.parcel_id }}</td>
+                        <td>{{ parcel.sendername }}</td>
+                        <td>{{ parcel.sender_contact }}</td>
+                        <td>{{ parcel.receivername }}</td>
+                        <td>{{ parcel.receiver_contact }}</td>
+                        <td>{{ parcel.receiver_postoffice }}</td>
+                        <td>{{ parcel.postman_name }}</td>
+                        <td>{{ parcel.kms }}</td>
+                        <td>{{ parcel.weight }} kg</td>
+                        <td>{{ parcel.price }}</td>
+                        <td>{{ parcel.posted_date }}</td>
+                        <td>{{ parcel.remarks }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="12" class="text-center text-gray-500">No parcel records found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

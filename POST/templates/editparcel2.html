@@ -1,0 +1,199 @@
+{% extends 'adminhome2.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Parcel</title>
+    <style>
+        /* Modal styles */
+.modal {
+    display: block; /* Show the modal by default */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background with more opacity */
+    padding-top: 60px; 
+}
+.modal-content {
+    background-color: #1e1e1e; /* Even darker background for modal content */
+    color: #f5f5f5; /* Bright white text color */
+    margin: 5% auto; 
+    padding: 20px;
+    border: 1px solid #444;
+    width: 80%; 
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7); /* Darker shadow */
+}
+.close {
+    color: #f5f5f5; /* Bright white color for close button */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: #ddd; /* Lighter gray on hover/focus for better visibility */
+    text-decoration: none;
+}
+
+/* Form styling */
+form {
+    font-family: Arial, sans-serif;
+}
+label {
+    display: block;
+    margin-top: 10px;
+    color: #f5f5f5; /* Bright white color for labels */
+}
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0;
+    border: 1px solid #666; /* Lighter border color */
+    border-radius: 4px;
+    background-color: #333; /* Dark background for input fields */
+    color: #f5f5f5; /* Bright white text color */
+}
+input[type="submit"] {
+    background-color: #555;
+    color: #f5f5f5;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+input[type="submit"]:hover {
+    background-color: #666;
+}
+img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <!-- The Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Edit Parcel</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+
+                <label for="post_id">Post ID:</label>
+                <input type="text" id="post_id" name="post_id" maxlength="500" value="{{ parcellist.post_id }}" required>
+                <br><br>
+
+                <!--<label for="parcel_id">Parcel ID:</label>
+                <input type="text" id="parcel_id" name="parcel_id" maxlength="500" value="{{ parcellist.parcel_id }}" required>
+                <br><br>-->
+
+                <label for="sendername">Sender Name:</label>
+                <input type="text" id="sendername" name="sendername"  max="100" value="{{ parcellist.sendername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z" required>
+                <br><br>
+
+                <label for="sender_address">Sender Address:</label>
+                <input type="text" id="sender_address" name="sender_address" maxlength="100" value="{{ parcellist.sender_address }}" required>
+                <br><br>
+
+                <label for="sender_contact">Sender Contact:</label>
+                <input type="text" id="sender_contact" name="sender_contact"  value="{{ parcellist.sender_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
+                <br><br>
+
+
+
+<label for="receivername">Receiver Name:</label>
+                <input type="text" id="receivername" name="receivername"  value="{{ parcellist.receivername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z"  required>
+                <br><br>
+<label for="receiver_address">Receiver Address:</label>
+                <input type="text" id="receiver_address" name="receiver_address"  value="{{ parcellist.receiver_address }}"  required>
+                <br><br>
+                <label for="receiver_email">Receiver Email:</label>
+                <input type="text" id="receiver_email" name="receiver_email">
+                <br><br>
+                <label for="receiver_postoffice">Post Office Name:</label>
+                <input type="text" id="receiver_postoffice" name="receiver_postoffice"  value="{{ parcellist.receiver_postoffice }}"  required>
+                <br><br>
+                <label for="receiver_contact">Receiver Contact:</label>
+                <input type="text" id="receiver_contact" name="receiver_contact"  value="{{ parcellist.receiver_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
+                <br><br>
+                <label for="posted_date">Delivery Date:</label>
+                <input type="text" id="posted_date" name="posted_date" value="{{ parcellist.posted_date | date:'Y-m-d' }}" placeholder="YYYY-MM-DD" required>
+                <label for="remarks">Remarks:</label>
+                <input type="text" id="remarks" name="remarks"  value="{{ parcellist.remarks }}"  required>
+                <br><br>
+                
+                <label for="weight">Weight:</label>
+                <input type="text" id="weight" name="weight"  value="{{ parcellist.weight }}"  required>
+                <br><br>
+                <label for="kms">Distance:</label>
+                <input type="text" id="kms" name="kms"  value="{{ parcellist.kms }}"  required>
+                <br><br>
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price"  value="{{ parcellist.price }}"  required>
+                <br><br>
+                <label for="postman_username">Postman Username:</label>
+                <input type="text" id="postman_username" name="postman_username"  value="{{ parcellist.postman_username }}"  required>
+                <br><br>
+                
+
+
+
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="">Select Status</option>
+                    <option value="Itembagged" {% if parcellist.status == 'Itembagged' %}selected{% endif %}>Item Bagged</option>
+                    <option value="Itemdispatched" {% if parcellist.status == 'Itemdispatched' %}selected{% endif %}>Item Dispatched</option>
+                    <option value="Outfordelivey" {% if parcellist.status == 'Outfodelivey' %}selected{% endif %}>Out for Delivery</option>
+                    <option value="Itemdelivered" {% if parcellist.status == 'Itemdelivered' %}selected{% endif %}>Item Delivered</option>
+                </select>
+                <br><br>
+                <!-- <input type="file" id="screenshot" name="screenshot"  accept="image/*" > -->
+                <img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">
+                <br><br>
+
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get modal element
+        var modal = document.getElementById("editModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

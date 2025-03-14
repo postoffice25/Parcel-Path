@@ -1,0 +1,104 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"> <!-- Include FontAwesome -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to clean the phone number by removing spaces and plus signs
+            const cleanPhoneNumber = (phoneNumber) => {
+                return phoneNumber.replace(/\s+/g, '').replace('+', '');
+            };
+
+            // Apply the cleaning function to each contact number on the page
+            const contactElements = document.querySelectorAll('.whatsapp-contact');
+            contactElements.forEach(element => {
+                let rawPhoneNumber = element.textContent.trim(); // Get the phone number text
+                let cleanNumber = cleanPhoneNumber(rawPhoneNumber); // Clean the number
+                let whatsappLink = `https://wa.me/${cleanNumber}`; // Generate the WhatsApp link
+                
+                // Creating the WhatsApp link with icon and number
+                element.innerHTML = `
+                    <a href="${whatsappLink}" target="_blank" class="flex items-center text-green-500 hover:text-green-700 font-bold">
+                        <i class="fab fa-whatsapp mr-2 text-lg"></i> Chat on WhatsApp: ${rawPhoneNumber}
+                    </a>`;
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const items = document.querySelectorAll('.postoffice-card');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                let hasResults = false;
+
+                items.forEach(item => {
+                    const name = item.querySelector('.postoffice-name')?.textContent.toLowerCase();
+                    const stationmaster = item.querySelector('.postoffice-stationmaster')?.textContent.toLowerCase();
+
+                    if (name.includes(searchTerm) || stationmaster.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/hide "No Results" message
+                document.getElementById('noResultsMessage').style.display = hasResults ? 'none' : 'block';
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-xl font-bold">Postoffice List</a>
+            <a href="/posthome/" class="text-white font-bold">Back</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8">
+        <div class="mb-6 relative">
+            <input 
+                id="searchInput" 
+                type="text" 
+                placeholder="Search by name, district, or stationmaster..." 
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {% for postoffice in postoffice %}
+            <div class="postoffice-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="relative">
+                    {% if postoffice.image %}
+                        <img src="{{ postoffice.image.url }}" alt="Post Office Image" class="w-full h-48 object-cover">
+                    {% else %}
+                        <img src="/static/images/default-postoffice.png" alt="Default Image" class="w-full h-48 object-cover">
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <h2 class="postoffice-name text-2xl font-semibold text-gray-800 text-center mb-2">{{ postoffice.postoffice_name }}</h2>
+                    <p class="postoffice-district text-center text-gray-600 mb-4">{{ postoffice.district }}</p>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <p><strong>Description:</strong> {{ postoffice.description }}</p>
+                        <p class="postoffice-stationmaster"><strong>Stationmaster:</strong> {{ postoffice.stationmaster }}</p>
+                        <p><strong>Contact:</strong> <span class="whatsapp-contact">{{ postoffice.contact }}</span></p>
+                        <p><strong>Email:</strong> {{ postoffice.email }}</p>
+                        <!-- <p><strong>Latitude:</strong> {{ postoffice.latitude }}</p>
+                        <p><strong>Longitude:</strong> {{ postoffice.longitude }}</p> -->
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="col-span-full text-center text-gray-500">No post office records found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

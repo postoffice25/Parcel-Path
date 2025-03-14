@@ -1,0 +1,100 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stamp List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const items = document.querySelectorAll('tbody tr');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                let hasResults = false;
+
+                items.forEach(item => {
+                    const name = item.querySelector('td:first-child')?.textContent.toLowerCase();
+                    if (name.includes(searchTerm)) {
+                        item.style.display = 'table-row';
+                        hasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/hide "No Results" message
+                document.getElementById('noResultsMessage').style.display = hasResults ? 'none' : 'block';
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-xl font-bold">Stamp List</a>
+            <a href="/home/" class="text-white font-bold">Back</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 p-4">
+        <!-- Search Bar -->
+        <div class="mb-6 relative">
+            <input 
+                id="searchInput" 
+                type="text" 
+                placeholder="Search by stamp name..." 
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500">
+        </div>
+
+        <!-- No Results Message -->
+        <p id="noResultsMessage" class="text-center text-gray-500 mt-4 hidden">
+            No matching stamps found.
+        </p>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 shadow-lg bg-white">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="p-3">Stamp Name</th>
+                        <th class="p-3">Cost</th>
+                        <th class="p-3">Weight</th>
+                        <th class="p-3">Description</th>
+                        <th class="p-3">Release Date</th>
+                        <th class="p-3">Status</th>
+                        <th class="p-3">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stamp in s %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="p-3">{{ stamp.stamp_name }}</td>
+                        <td class="p-3">${{ stamp.cost }}</td>
+                        <td class="p-3">{{ stamp.weight }}g</td>
+                        <td class="p-3">{{ stamp.description }}</td>
+                        <td class="p-3">{{ stamp.release_date }}</td>
+                        <td class="p-3">{{ stamp.status }}</td>
+                        <td class="p-3">
+                            {% if stamp.image %}
+                                <img src="{{ stamp.image.url }}" alt="Stamp Image" class="w-16 h-16 object-cover rounded">
+                            {% else %}
+                                <span class="text-gray-500">No Image Found</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center p-4 text-gray-600">No stamp records found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

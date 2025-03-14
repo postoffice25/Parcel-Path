@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .styled-button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 12px 24px; /* Padding for button size */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+            font-weight: bold; /* Bold text */
+            text-align: center; /* Centered text */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background and scaling */
+            text-decoration: none; /* Remove default link styles */
+        }
+
+        .styled-button:hover {
+            background-color: #45a049; /* Darker green when hovered */
+            transform: scale(1.05); /* Slightly enlarge the button */
+        }
+
+        .styled-button:active {
+            transform: scale(0.98); /* Slightly shrink the button when clicked */
+        }
+
+        /* Centering the button to the right */
+        .right-align {
+            text-align: right;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Pincode</th>
+                    <th>District</th>
+                    <th>Image</th>
+                    <th>Delete</th>
+                </tr>
+                {% for user in user %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.pincodeno }}</td>
+                    <td>{{ user.districtname }}</td>
+                    <td>
+                        {% if user.image %}
+                            <img src="{{ user.image.url }}" alt="User Image">
+                        {% else %}
+                            <img src="/static/images/default-profile.png" alt="No Image Found">
+                        {% endif %}
+                    </td>            
+                    <td>
+                        <a href="/deleteuser/{{ user.id }}">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <form method="post" action="{% url 'update_status' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="email" value="{{ user.email }}">
+                            <select name="status">
+                                <option value="applied" {% if user.status == 'applied' %}selected{% endif %}>Applied</option>
+                                <option value="approved" {% if user.status == 'approved' %}selected{% endif %}>Approved</option>
+                                <option value="rejected" {% if user.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                            </select>
+                            <button type="submit">Update status</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="right-align">
+                <a href="/adminhome2/" class="styled-button">Back to Home</a>
+            </div>
+            <body>
+                <html>
+            

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Postman Profile</title>
+    <!-- Bootstrap 4 for responsive design and styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-card {
+            margin-top: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        .styled-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .center-align {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <h2>Edit Postman Profile</h2>
+
+            <!-- Form to edit postman profile -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{ postman.name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" name="age" id="age" value="{{ postman.age }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <input type="text" class="form-control" name="gender" id="gender" value="{{ postman.gender }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea class="form-control" name="address" id="address" rows="4" required>{{ postman.address }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" name="phone" id="phone" value="{{ postman.phone }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{ postman.email }}" required>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="form-group">
+                    <label for="image">Profile Image</label>
+                    <input type="file" class="form-control" name="image" id="image">
+                    {% if postman.image %}
+                        <img src="{{ postman.image.url }}" alt="Current Profile Image" class="profile-avatar">
+                    {% else %}
+                        <p>No Profile Image</p>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+                <div class="center-align">
+                    <a href="/postman_profile/" class="styled-button">Back</a>
+            </div>
+        
+            </form>
+        </div>
+    </div>
+
+    <!-- Optional: jQuery and Bootstrap JS for additional functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Office Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+  <center>  <h1>Add Post Office</h1></center>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--<label for="postoffice_id">Post Office ID:</label>
+        <input type="text" id="postoffice_id" name="postoffice_id" required>
+        <br><br>-->
+
+        <label for="postoffice_name">Post Office Name:</label>
+        <input type="text" id="postoffice_name" name="postoffice_name" required>
+        <br><br>
+
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district" value="Thrissur" readonly>
+        <!--<select id="district" name="district" required>
+            <option value="">Select District</option>
+            <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            <option value="Kollam">Kollam</option>
+            <option value="Pathanamthitta">Pathanamthitta</option>
+            <option value="Alappuzha">Alappuzha</option>
+            <option value="Kottayam">Kottayam</option>
+            <option value="Idukki">Idukki</option>
+            <option value="Ernakulam">Ernakulam</option>
+            <option value="Thrissur">Thrissur</option>
+            <option value="Palakkad">Palakkad</option>
+            <option value="Malappuram">Malappuram</option>
+            <option value="Wayanad">Wayanad</option>
+            <option value="Kozhikode">Kozhikode</option>
+            <option value="Kannur">Kannur</option>
+            <option value="Kasargod">Kasargod</option>
+        </select>
+        <br><br>-->
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <br><br>
+
+        <label for="stationmaster">Stationmaster:</label>
+        <input type="text" id="stationmaster" name="stationmaster" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z" required>
+        <br><br>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" required pattern="^\d{10}$" title="Please enter exactly 10 digits" oninput="this.value = this.value.replace(/\D/g, '')">
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+{% endblock %}
+

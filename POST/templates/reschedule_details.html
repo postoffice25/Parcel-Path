@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reschedule Parcel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .details-section, .reschedule-form {
+            margin-bottom: 30px;
+        }
+        .details-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details-section table, .details-section th, .details-section td {
+            border: 1px solid #ddd;
+        }
+        .details-section th, .details-section td {
+            padding: 10px;
+            text-align: left;
+        }
+        .details-section th {
+            background-color: #f8f8f8;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="date"], input[type="submit"], .button {
+            padding: 10px;
+            width: 30%;           
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;        
+            margin: 0 auto; 
+            font-size: 16px; 
+        }
+        .form-group input[type="submit"], .button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover, .button:hover {
+            background-color: #45a049;
+        }
+        .reject-button {
+            background-color: #f44336;
+        }
+        .reject-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Reschedule Parcel Delivery</h1>
+    
+    <div class="details-section">
+        <h2>Parcel Details</h2>
+        <table>
+            <tr>
+                <th>Parcel ID</th>
+                <td>{{ details.parcel.parcel_id }}</td>
+            </tr>
+            <tr>
+                <th>Sender Name</th>
+                <td>{{ details.parcel.sendername }}</td>
+            </tr>
+            <tr>
+                <th>Receiver Name</th>
+                <td>{{ details.parcel.receivername }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ details.parcel.receiver_email }}</td>
+            </tr>
+            <tr>
+                <th>Delivery date</th>
+                <td>{{ details.parcel.posted_date }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ details.parcel.status }}</td>
+            </tr>
+            <tr>
+                <th>Current Reschedule Date</th>
+                <td>{{ details.rescheduled_date }}</td>
+            </tr>
+        </table>
+    </div>
+    <form method="POST">
+        <a href='/approve_reschedule/{{ details.parcel_id }}/'>Approve</a>
+        <a href='/reject_reschedule/{{ details.parcel_id }}/'>Reject</a>
+</div>
+</body>
+</html>
