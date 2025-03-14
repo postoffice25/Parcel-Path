@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["parcelpath-546g.onrender.com", "localhost", "127.0.0.1"]
 
+CSRF_TRUSTED_ORIGINS = [
+    
+    "https://parcelpath-546g.onrender.com/"
+]
+
 
 # Application definition
 
