@@ -909,7 +909,7 @@ def pm_forgot_password(request):
             send_mail(subject, message, settings.EMAIL_HOST_postman,[email])
             request.session['reset_email'] = email
             request.session['otp_timestamp'] = time.time()
-            return redirect('verify_otp')
+            return redirect('pm_verify_otp')
         except postman.DoesNotExist:
             return HttpResponse("<script>alert('Email not found'); window.location.href='/pm_forgot_password/';</script>")
     return render(request, 'pm_forgot_password.html')
