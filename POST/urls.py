@@ -27,6 +27,7 @@ urlpatterns = [
     path('user_parcels/', views.user_parcels, name='user_parcels'),
     path('parcel_detail/<int:id>/', views.parcel_detail, name='parcel_detail'),  
     path('deleteuser/<int:did>',views.deleteuser,name='deleteuser'),
+    path('deleteuser2/<int:did>',views.deleteuser2,name='deleteuser2'),
     path('profile/',views.profile,name='profile'),
     path('editprofile/', views.editprofile, name='editprofile'),
     path('update_status/',views.update_status,name='update_status'),

@@ -121,6 +121,10 @@ def deleteuser(request,did):
     d=USER.objects.get(id=did)
     d.delete()
     return redirect('userlist')
+def deleteuser2(request,did):
+    d=USER.objects.get(id=did)
+    d.delete()
+    return redirect('userlist2')
 def profile(request):
     if 'email' in request.session:
         semail = request.session['email']
