@@ -382,7 +382,6 @@ def edit_parcel(request, id):
     parcellist= get_object_or_404(postmodel, id=id)
     if request.method == 'POST':
         parcellist.post_id = request.POST.get('post_id')
-        parcellist.parcel_id = request.POST.get('parcel_id')
         parcellist.sendername = request.POST.get('sendername')
         parcellist.sender_address = request.POST.get('sender_address')
         parcellist.sender_contact = request.POST.get('sender_contact')
