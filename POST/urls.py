@@ -102,7 +102,4 @@ urlpatterns = [
     path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('verify-otp/', views.verify_otp, name='verify_otp'),
     path('reset-password/', views.reset_password, name='reset_password'),
-    path('pm_forgot_password/', views.pm_forgot_password, name='pm_forgot_password'),
-    path('pm_verify_otp/', views.pm_verify_otp, name='pm_verify_otp'),
-    path('pm_reset_password/', views.pm_reset_password, name='pm_reset_password'),
 ]
