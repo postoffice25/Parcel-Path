@@ -159,7 +159,7 @@ img {
                 <label for="status">Status:</label>
                 <select id="status" name="status" required>
                     <option value="">Select Status</option>
-                    <option value="Itembagged" {% if parcellist.status == 'Itembagged' %}selected{% endif %}>Item Bagged</option>
+                    <option value="itempacked" {% if parcellist.status == 'itempacked' %}selected{% endif %}>Item Bagged</option>
                     <option value="Itemdispatched" {% if parcellist.status == 'Itemdispatched' %}selected{% endif %}>Item Dispatched</option>
                     <option value="Outfordelivey" {% if parcellist.status == 'Outfodelivey' %}selected{% endif %}>Out for Delivery</option>
                     <option value="Itemdelivered" {% if parcellist.status == 'Itemdelivered' %}selected{% endif %}>Item Delivered</option>
