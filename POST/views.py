@@ -391,7 +391,6 @@ def edit_parcel(request, id):
         parcellist.receiver_contact = request.POST.get('receiver_contact')
         parcellist.posted_date = request.POST.get('posted_date')
         parcellist.remarks = request.POST.get('remarks')
-        parcellist.status = request.POST.get('status')
         parcellist.weight = request.POST.get('weight')
         parcellist.kms = request.POST.get('kms')
         parcellist.price = request.POST.get('price')
