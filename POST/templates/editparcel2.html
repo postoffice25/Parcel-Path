@@ -106,7 +106,7 @@ img {
 
                 <!--<label for="parcel_id">Parcel ID:</label>
                 <input type="text" id="parcel_id" name="parcel_id" maxlength="500" value="{{ parcellist.parcel_id }}" required>
-                <br><br>-->
+                <br><br> -->
 
                 <label for="sendername">Sender Name:</label>
                 <input type="text" id="sendername" name="sendername"  max="100" value="{{ parcellist.sendername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z" required>
@@ -120,8 +120,7 @@ img {
                 <input type="text" id="sender_contact" name="sender_contact"  value="{{ parcellist.sender_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
                 <br><br>
 
-
-
+<br><br>
 <label for="receivername">Receiver Name:</label>
                 <input type="text" id="receivername" name="receivername"  value="{{ parcellist.receivername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z"  required>
                 <br><br>
@@ -152,7 +151,7 @@ img {
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price"  value="{{ parcellist.price }}"  required>
                 <br><br>
-                <label for="postman_username">Postman Username:</label>
+                <label for="postman_name">Postman Username:</label>
                 <input type="text" id="postman_name" name="postman_name"  value="{{ parcellist.postman_name }}"  required>
                 <br><br>
                 
@@ -169,8 +168,8 @@ img {
                 </select>
                 <br><br>-->
                 <!-- <input type="file" id="screenshot" name="screenshot"  accept="image/*" > -->
-                <!--<img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">
-                <br><br> -->
+                <!--<img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">-->
+                <br><br> 
 
 
                 <input type="submit" value="Submit">
