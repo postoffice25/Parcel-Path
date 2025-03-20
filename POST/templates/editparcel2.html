@@ -101,7 +101,7 @@ img {
                 
 
                 <label for="post_id">Post ID:</label>
-                <input type="text" id="post_id" name="post_id" maxlength="500" value="{{ parcellist.post_id }}" required>
+                <input type="text" id="post_id" name="post_id" maxlength="500" value="{{ parcellist2.post_id }}" required>
                 <br><br>
 
                 <!--<label for="parcel_id">Parcel ID:</label>
@@ -109,48 +109,48 @@ img {
                 <br><br> -->
 
                 <label for="sendername">Sender Name:</label>
-                <input type="text" id="sendername" name="sendername"  max="100" value="{{ parcellist.sendername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z" required>
+                <input type="text" id="sendername" name="sendername"  max="100" value="{{ parcellist2.sendername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z" required>
                 <br><br>
 
                 <label for="sender_address">Sender Address:</label>
-                <input type="text" id="sender_address" name="sender_address" maxlength="100" value="{{ parcellist.sender_address }}" required>
+                <input type="text" id="sender_address" name="sender_address" maxlength="100" value="{{ parcellist2.sender_address }}" required>
                 <br><br>
 
                 <label for="sender_contact">Sender Contact:</label>
-                <input type="text" id="sender_contact" name="sender_contact"  value="{{ parcellist.sender_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
+                <input type="text" id="sender_contact" name="sender_contact"  value="{{ parcellist2.sender_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
                 <br><br>
 
 <br><br>
 <label for="receivername">Receiver Name:</label>
-                <input type="text" id="receivername" name="receivername"  value="{{ parcellist.receivername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z"  required>
+                <input type="text" id="receivername" name="receivername"  value="{{ parcellist2.receivername }}" pattern="[a-z A-Z]+$" title="Enter alphabet b/n A-Z a-z"  required>
                 <br><br>
 <label for="receiver_address">Receiver Address:</label>
-                <input type="text" id="receiver_address" name="receiver_address"  value="{{ parcellist.receiver_address }}"  required>
+                <input type="text" id="receiver_address" name="receiver_address"  value="{{ parcellist2.receiver_address }}"  required>
                 <br><br>
                 <label for="receiver_postoffice">Post Office Name:</label>
-                <input type="text" id="receiver_postoffice" name="receiver_postoffice"  value="{{ parcellist.receiver_postoffice }}"  required>
+                <input type="text" id="receiver_postoffice" name="receiver_postoffice"  value="{{ parcellist2.receiver_postoffice }}"  required>
                 <br><br>
                 <label for="receiver_contact">Receiver Contact:</label>
-                <input type="text" id="receiver_contact" name="receiver_contact"  value="{{ parcellist.receiver_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
+                <input type="text" id="receiver_contact" name="receiver_contact"  value="{{ parcellist2.receiver_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
                 <br><br>
                 <label for="posted_date">Delivery Date:</label>
-                <input type="text" id="posted_date" name="posted_date" value="{{ parcellist.posted_date | date:'Y-m-d' }}" placeholder="YYYY-MM-DD" required>
+                <input type="text" id="posted_date" name="posted_date" value="{{ parcellist2.posted_date | date:'Y-m-d' }}" placeholder="YYYY-MM-DD" required>
 
                 <label for="remarks">Remarks:</label>
-                <input type="text" id="remarks" name="remarks"  value="{{ parcellist.remarks }}"  required>
+                <input type="text" id="remarks" name="remarks"  value="{{ parcellist2.remarks }}"  required>
                 <br><br>
                 
                 <label for="weight">Weight:</label>
-                <input type="text" id="weight" name="weight"  value="{{ parcellist.weight }}"  required>
+                <input type="text" id="weight" name="weight"  value="{{ parcellist2.weight }}"  required>
                 <br><br>
                 <label for="kms">Distance:</label>
-                <input type="text" id="kms" name="kms"  value="{{ parcellist.kms }}"  required>
+                <input type="text" id="kms" name="kms"  value="{{ parcellist2.kms }}"  required>
                 <br><br>
                 <label for="price">Price:</label>
-                <input type="text" id="price" name="price"  value="{{ parcellist.price }}"  required>
+                <input type="text" id="price" name="price"  value="{{ parcellist2.price }}"  required>
                 <br><br>
                 <label for="postman_name">Postman Username:</label>
-                <input type="text" id="postman_name" name="postman_name"  value="{{ parcellist.postman_name }}"  required>
+                <input type="text" id="postman_name" name="postman_name"  value="{{ parcellist2.postman_name }}"  required>
                 <br><br>
                 
 
