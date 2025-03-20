@@ -395,7 +395,6 @@ def edit_parcel(request, id):
         parcellist.kms = request.POST.get('kms')
         parcellist.price = request.POST.get('price')
         parcellist.postman_name = request.POST.get('postman_name')
-        parcellist.screenshot = request.POST.get('screenshot')
         parcellist.save()
         return redirect('parcellist')  
     else:
