@@ -460,7 +460,6 @@ def edit_postoffice(request, id):
         post.postoffice_id = request.POST.get('postoffice_id')
         post.postoffice_name = request.POST.get('postoffice_name')
         post.district = request.POST.get('district')
-        post.image=request.POST.get('image')
         post.description = request.POST.get('description')
         post.stationmaster = request.POST.get('stationmaster')
         post.contact = request.POST.get('contact')
