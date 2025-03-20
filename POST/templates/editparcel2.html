@@ -127,9 +127,6 @@ img {
 <label for="receiver_address">Receiver Address:</label>
                 <input type="text" id="receiver_address" name="receiver_address"  value="{{ parcellist.receiver_address }}"  required>
                 <br><br>
-                <label for="receiver_email">Receiver Email:</label>
-                <input type="text" id="receiver_email" name="receiver_email">
-                <br><br>
                 <label for="receiver_postoffice">Post Office Name:</label>
                 <input type="text" id="receiver_postoffice" name="receiver_postoffice"  value="{{ parcellist.receiver_postoffice }}"  required>
                 <br><br>
@@ -138,6 +135,7 @@ img {
                 <br><br>
                 <label for="posted_date">Delivery Date:</label>
                 <input type="text" id="posted_date" name="posted_date" value="{{ parcellist.posted_date | date:'Y-m-d' }}" placeholder="YYYY-MM-DD" required>
+
                 <label for="remarks">Remarks:</label>
                 <input type="text" id="remarks" name="remarks"  value="{{ parcellist.remarks }}"  required>
                 <br><br>
@@ -157,19 +155,18 @@ img {
                 
 
 
-
-                <!--<label for="status">Status:</label>
+               <!--<label for="status">Status:</label>
                 <select id="status" name="status" required>
                     <option value="">Select Status</option>
-                    <option value="Itembagged" {% if parcellist.status == 'Itembagged' %}selected{% endif %}>Item Bagged</option>
+                    <option value="itempacked" {% if parcellist.status == 'itempacked' %}selected{% endif %}>Item Bagged</option>
                     <option value="Itemdispatched" {% if parcellist.status == 'Itemdispatched' %}selected{% endif %}>Item Dispatched</option>
                     <option value="Outfordelivey" {% if parcellist.status == 'Outfodelivey' %}selected{% endif %}>Out for Delivery</option>
                     <option value="Itemdelivered" {% if parcellist.status == 'Itemdelivered' %}selected{% endif %}>Item Delivered</option>
                 </select>
-                <br><br>-->
+                <br><br> -->
                 <!-- <input type="file" id="screenshot" name="screenshot"  accept="image/*" > -->
-                <!--<img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">-->
-                <br><br> 
+               <!-- <img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image"> -->
+                <br><br>
 
 
                 <input type="submit" value="Submit">
