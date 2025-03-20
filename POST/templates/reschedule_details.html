@@ -113,6 +113,10 @@
     <form method="POST">
         <a href='/approve_reschedule/{{ details.parcel_id }}/'>Approve</a>
         <a href='/reject_reschedule/{{ details.parcel_id }}/'>Reject</a>
+        <br><br>
+        <div class="text-right">
+            <a href="{% url 'adminhome2' %}" class="link">Back to Home</a>
+        </div>
 </div>
 </body>
 </html>
