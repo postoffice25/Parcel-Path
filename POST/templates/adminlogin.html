@@ -109,7 +109,7 @@ button:hover{
 	{% csrf_token %}
     <label for="chk" aria-hidden="true">Superadmin Login</label>
     <input type="email" id="email" name="email" placeholder="Email" required>
-	<input type="password" id="password" name="password" placeholder="Password" required minlength="4" title="password must be 4 characters">
+	<input type="password" id="password" name="password" placeholder="Password" required minlength="4" title="Password must be 8 characters and contain special characters"pattern="^(?=.*[!@#$%^&*_\-+=<>?]).{8,}$">
     <button type="submit">Login</button>
    </form>
 </div>

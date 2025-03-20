@@ -172,7 +172,7 @@ def adminlogin(request):
         email=request.POST.get('email')
         password=request.POST.get('password')
         u='admin@gmail.com'
-        p='admin'
+        p='admin_01'
         if email==u:
             if password==p:
                 return redirect('adminhome')
@@ -475,7 +475,7 @@ def adminlogin2(request):
         email=request.POST.get('email')
         password=request.POST.get('password')
         u='admin2@gmail.com'
-        p='admin2'
+        p='admin_02'
         if email==u:
             if password==p:
                 return redirect('adminhome2')
