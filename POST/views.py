@@ -548,7 +548,7 @@ def deleteparcel2(request,id):
     p.delete()
     return redirect('parcellist2')
 def edit_parcel2(request, id):
-    parcellist= get_object_or_404(postmodel, id=id)
+    parcellist2= get_object_or_404(postmodel, id=id)
     if request.method == 'POST':
         parcellist.post_id = request.POST.get('post_id')
         parcellist.sendername = request.POST.get('sendername')
@@ -568,7 +568,7 @@ def edit_parcel2(request, id):
         return redirect('parcellist2')  
     else:
         parcel=postmodel.objects.all()
-        return render(request,'editparcel2.html',{'parcellist2':parcellist,'parcel':parcel})        
+        return render(request,'editparcel2.html',{'parcellist2':parcellist2,'parcel':parcel})        
 def update_status(request):
     if request.method=="POST":
         email=request.POST.get('email')
