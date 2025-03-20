@@ -133,6 +133,9 @@ img {
                 <label for="receiver_contact">Receiver Contact:</label>
                 <input type="text" id="receiver_contact" name="receiver_contact"  value="{{ parcellist.receiver_contact }}" required pattern="^\d{10}$" title="Please enter exactly 10 digits"  required>
                 <br><br>
+                <label for="receiver_email"> Receiver Email:</label>
+                <input type="text" id="receiver_email" name="receiver_email"  value="{{ parcellist.receiver_email }}" required>
+                <br><br>
                 <label for="posted_date">Delivery Date:</label>
                 <input type="text" id="posted_date" name="posted_date" value="{{ parcellist.posted_date | date:'Y-m-d' }}" placeholder="YYYY-MM-DD" required>
 
