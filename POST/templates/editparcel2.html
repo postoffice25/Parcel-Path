@@ -153,13 +153,13 @@ img {
                 <input type="text" id="price" name="price"  value="{{ parcellist.price }}"  required>
                 <br><br>
                 <label for="postman_username">Postman Username:</label>
-                <input type="text" id="postman_username" name="postman_username"  value="{{ parcellist.postman_username }}"  required>
+                <input type="text" id="postman_name" name="postman_name"  value="{{ parcellist.postman_name }}"  required>
                 <br><br>
                 
 
 
 
-                <label for="status">Status:</label>
+                <!--<label for="status">Status:</label>
                 <select id="status" name="status" required>
                     <option value="">Select Status</option>
                     <option value="Itembagged" {% if parcellist.status == 'Itembagged' %}selected{% endif %}>Item Bagged</option>
@@ -167,10 +167,10 @@ img {
                     <option value="Outfordelivey" {% if parcellist.status == 'Outfodelivey' %}selected{% endif %}>Out for Delivery</option>
                     <option value="Itemdelivered" {% if parcellist.status == 'Itemdelivered' %}selected{% endif %}>Item Delivered</option>
                 </select>
-                <br><br>
+                <br><br>-->
                 <!-- <input type="file" id="screenshot" name="screenshot"  accept="image/*" > -->
-                <img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">
-                <br><br>
+                <!--<img src="{{ parcellist.screenshot.images.url }}" alt="parcel Image">
+                <br><br> -->
 
 
                 <input type="submit" value="Submit">

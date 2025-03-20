@@ -560,12 +560,10 @@ def edit_parcel2(request, id):
         parcellist.receiver_contact = request.POST.get('receiver_contact')
         parcellist.posted_date = request.POST.get('posted_date')
         parcellist.remarks = request.POST.get('remarks')
-        parcellist.status = request.POST.get('status')
         parcellist.weight = request.POST.get('weight')
         parcellist.kms = request.POST.get('kms')
         parcellist.price = request.POST.get('price')
-        parcellist.screenshot = request.POST.get('screenshot')
-        parcellist.postman_username = request.POST.get('postman_username')
+        parcellist.postman_name = request.POST.get('postman_name')
         parcellist.save()
         return redirect('parcellist2')  
     else:
